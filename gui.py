@@ -53,6 +53,7 @@ class Ui_remote(object):
         font = QtGui.QFont()
         font.setPointSize(14)
         self.tv_status.setFont(font)
+        self.tv_status.setReadOnly(True)
         self.tv_status.setObjectName("tv_status")
 
         self.retranslateUi(remote)

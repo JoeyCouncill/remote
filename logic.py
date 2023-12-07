@@ -50,10 +50,11 @@ class Logic(QMainWindow, Ui_remote):
         dictionary: dict = self.file_read(all_values=True)
         current_state: int = int(dictionary['volume'])
         if current_state < self.MAX_VOLUME:
-            current_state += 1
-            dictionary['volume']: str = str(current_state)
-            self.file_write(dictionary)
-            self.update(dictionary)
+            if dictionary['mute'] == 'false' and dictionary['power'] == 'true':
+                current_state += 1
+                dictionary['volume']: str = str(current_state)
+                self.file_write(dictionary)
+                self.update(dictionary)
         else:
             pass
 
@@ -63,10 +64,11 @@ class Logic(QMainWindow, Ui_remote):
         dictionary: dict = self.file_read(all_values=True)
         current_state: int = int(dictionary['volume'])
         if current_state > self.MIN_VOLUME:
-            current_state -= 1
-            dictionary['volume']: str = str(current_state)
-            self.file_write(dictionary)
-            self.update(dictionary)
+            if dictionary['mute'] == 'false' and dictionary['power'] == 'true':
+                current_state -= 1
+                dictionary['volume']: str = str(current_state)
+                self.file_write(dictionary)
+                self.update(dictionary)
         else:
             pass
 
@@ -74,12 +76,13 @@ class Logic(QMainWindow, Ui_remote):
         """Switches the television between muted and not muted"""
         dictionary: dict = self.file_read(all_values=True)
         current_state: str = dictionary['mute']
-        if current_state == 'true':
-            dictionary['mute']: str = 'false'
-        else:
-            dictionary['mute']: str = 'true'
-        self.update(dictionary)
-        self.file_write(dictionary)
+        if dictionary['power'] == 'true':
+            if current_state == 'true':
+                dictionary['mute']: str = 'false'
+            else:
+                dictionary['mute']: str = 'true'
+            self.update(dictionary)
+            self.file_write(dictionary)
 
     def channel_up(self):
         """Increases the televisions channel by one until
@@ -87,10 +90,11 @@ class Logic(QMainWindow, Ui_remote):
         dictionary: dict = self.file_read(all_values=True)
         current_state: int = int(dictionary['channel'])
         if current_state < self.MAX_CHANNEL:
-            current_state += 1
-            dictionary['channel']: str = str(current_state)
-            self.file_write(dictionary)
-            self.update(dictionary)
+            if dictionary['power'] == 'true':
+                current_state += 1
+                dictionary['channel']: str = str(current_state)
+                self.file_write(dictionary)
+                self.update(dictionary)
         else:
             pass
 
@@ -100,10 +104,11 @@ class Logic(QMainWindow, Ui_remote):
         dictionary: dict = self.file_read(all_values=True)
         current_state: int = int(dictionary['channel'])
         if current_state > self.MIN_CHANNEL:
-            current_state -= 1
-            dictionary['channel']: str = str(current_state)
-            self.file_write(dictionary)
-            self.update(dictionary)
+            if dictionary['power'] == 'true':
+                current_state -= 1
+                dictionary['channel']: str = str(current_state)
+                self.file_write(dictionary)
+                self.update(dictionary)
         else:
             pass
 

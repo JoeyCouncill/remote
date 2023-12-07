@@ -144,10 +144,11 @@
      <pointsize>14</pointsize>
     </font>
    </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
   </widget>
  </widget>
- <resources>
-  <include location="New Text Document.txt"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
